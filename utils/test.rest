@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Death",
-    "author": "Satan",
+    "title": "Hell",
+    "author": "Mongo",
     "url": "www.google.com",
-    "likes": "5"
+    "likes": "4"
 }

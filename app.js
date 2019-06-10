@@ -18,11 +18,12 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
 
 app.use(express.static('build'))
 app.use(bodyParser.json())
-//app.use(middleware.requestLogger)
+
 
 app.use('/api/blogs', blogRouter)
 
-//app.use(middleware.unknownEndpoint)
-//app.use(middleware.errorHandler)
+
+app.use(middleware.eiLoydy)
+app.use(middleware.virheHandlaaja)
 
 module.exports = app
