@@ -13,7 +13,7 @@ usersRouter.post('/', async (req, res, next) => {
 
     const user = new User({username: body.username,
       name: body.name,
-      salasanaHash,
+      passwordHash: salasanaHash,
     })
 
     const uusiUser = await user.save()
