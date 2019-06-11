@@ -12,7 +12,7 @@ const loydaToken = req => {const auth = req.get('authorization')
 
 blogRouter.get('/', async (req, res, next) => {
   try{
-    const blogs = await Blog.find({})
+    const blogs = await Blog.find({}).populate('user', {username: 1, name: 1, id: 1})
     res.json(blogs)
   } catch (exception){
     next(exception)
@@ -42,9 +42,10 @@ blogRouter.get('/', async (req, res, next) => {
         user: user._id
       })
       const result = await blog.save()
-      user.notes = user.blogs.concat(result._id)
+      user.blogs = user.blogs.concat(result._id)
+      console.log("user: ", user)
       await user.save()
-      console.log("blog saved...")
+      console.log("user and blogblog saved...")
       res.status(201).json(result)
     } catch (exception){
       //console.log("kommer så här långt")

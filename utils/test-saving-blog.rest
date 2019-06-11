@@ -3,8 +3,8 @@ content-type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1vbmdvIiwiaWQiOiI1Y2ZmZjNkY2M0ZTdjODE5ZmNlZTlkNzUiLCJpYXQiOjE1NjAyNzc5OTN9.BKDLTJTFuYgIv0E77g0riHkITwJ2Q-hwoBUVaHrQmJs
 
 {
-      "_id": "5b522bc62b54a676234d17fc",
-      "title": "Type wars 3",
+      "_id": "5b532bc62b54a676234d17fc",
+      "title": "Type wars 4",
       "author": "Robert C. Martin",
       "url": "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
       "likes": 5,
