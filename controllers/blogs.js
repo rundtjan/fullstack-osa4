@@ -3,13 +3,6 @@ const Blog = require('../models/blog')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
-const loydaToken = req => {const auth = req.get('authorization')
-  if (auth && auth.toLowerCase().startsWith('bearer ')) {
-    return auth.substring(7)
-  }
-  return null
-}
-
 blogRouter.get('/', async (req, res, next) => {
   try{
     const blogs = await Blog.find({}).populate('user', {username: 1, name: 1, id: 1})
@@ -20,15 +13,15 @@ blogRouter.get('/', async (req, res, next) => {
   })
   
   blogRouter.post('/', async (req, res, next) => {
+    console.log("reaction")
     if (!req.body.likes){
       req.body.likes = 0;
     }
 
-    const token = loydaToken(req)
-    
+
     try{
-      const decryptToken = jwt.verify(token, process.env.SECRET)
-      if (!token || !decryptToken.id) {return res.status(401).json({ error: 'et taida olla kirjautunut' })}
+      const decryptToken = jwt.verify(req.token, process.env.SECRET)
+      if (!req.token || !decryptToken.id) {return res.status(401).json({ error: 'et taida olla kirjautunut' })}
       
       const user = await User.findById(decryptToken.id)
       
@@ -56,8 +49,16 @@ blogRouter.get('/', async (req, res, next) => {
 
   blogRouter.delete('/:id', async (req, res, next) => {
     try {
-      const result = await Blog.findByIdAndRemove(req.params.id)
-      res.status(204).end()
+      const decryptToken = jwt.verify(req.token, process.env.SECRET)
+      if (!req.token || !decryptToken.id) {return res.status(401).json({ error: 'et taida olla kirjautunut' })}
+      
+      const user = await User.findById(decryptToken.id)
+      const blog = await Blog.findById(req.params.id)
+      if (blog.user.toString() === user._id.toString())
+      {const result = await Blog.findByIdAndRemove(req.params.id)
+      res.status(204).end()} else {
+      res.status(401).json({ error: 'et taida olla blogin laatija' })
+      }
     } catch (exception){
       next(error)
     }
