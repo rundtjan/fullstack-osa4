@@ -1,9 +1,8 @@
-POST http://localhost:3003/api/blogs HTTP/1.1
+POST http://localhost:3003/api/users HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Hell",
-    "author": "Mongo",
-    "url": "www.google.com",
-    "likes": "4"
+    "username": "Mongo",
+    "name": "Bongo Wallen",
+    "password": "KingKo"
 }

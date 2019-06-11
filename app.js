@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const blogRouter = require('./controllers/blogs')
+const usersRouter = require('./controllers/users')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
 console.log("i app: " + config.MONGODB_URI)
@@ -21,6 +22,7 @@ app.use(bodyParser.json())
 
 
 app.use('/api/blogs', blogRouter)
+app.use('/api/users', usersRouter)
 
 
 app.use(middleware.eiLoydy)

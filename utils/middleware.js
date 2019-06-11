@@ -5,7 +5,7 @@
   const virheHandlaaja = (error, req, res, next) => {
     console.log(error.name)
     if (error.name === 'ValidationError') {
-      return response.status(400).json({error: error.message})
+      return res.status(400).json({error: error.message})
     }
   
     next(error)
