@@ -51,16 +51,21 @@ blogRouter.get('/', async (req, res, next) => {
     try {
       const decryptToken = jwt.verify(req.token, process.env.SECRET)
       if (!req.token || !decryptToken.id) {return res.status(401).json({ error: 'et taida olla kirjautunut' })}
-      
+      console.log(req.params.id)
+      var blogId = req.params.id
       const user = await User.findById(decryptToken.id)
-      const blog = await Blog.findById(req.params.id)
-      if (blog.user.toString() === user._id.toString())
-      {const result = await Blog.findByIdAndRemove(req.params.id)
-      res.status(204).end()} else {
-      res.status(401).json({ error: 'et taida olla blogin laatija' })
+      const blog = await Blog.findById(blogId)
+      console.log(blog)
+      if (blog.user.toString() === user._id.toString()){
+        console.log("identification")
+        const result = await Blog.findByIdAndRemove(req.params.id)
+      return res.status(204).end()
+    } else {
+      console.log("forget it")
+      return res.status(401).json({ error: 'et taida olla blogin laatija' })
       }
     } catch (exception){
-      next(error)
+      next(exception)
     }
   })
 

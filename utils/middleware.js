@@ -1,5 +1,5 @@
   const eiLoydy = (req, res) => {
-    response.status(404).send({error:'sivua ei löydy'})
+    res.status(404).send({error:'sivua ei löydy'})
   }
   
   const virheHandlaaja = (error, req, res, next) => {
@@ -22,6 +22,7 @@
       console.log(req.token)
       next()
     }
+    next()
   }
   
   
